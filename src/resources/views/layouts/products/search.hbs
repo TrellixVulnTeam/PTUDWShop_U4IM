@@ -1,0 +1,45 @@
+       	<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+<div class="mt-4">
+    <div class="x_panel">
+         <div class="title_right">
+           <h1>{{s_item}}</h1>
+                  <form class="form-inline my-2 my-lg-0" action="/products/search" method="get">    
+                <input class="form-control mr-sm-2" type="text" name="q" placeholder="Input the name">    
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>    
+              </form>   
+              </div>
+            </div>
+        	<h3>Search result</h3>
+                 	{{#each page_items.[0].page}}
+                   {{#each ../page_items.[0].search}}
+						<a href="/products/search?q={{this}}&page={{../this}}" class="btn btn-secondary">{{../this}}</a>
+            {{/each}}
+						{{/each}}
+                      <div class="clearfix"></div>
+                         {{#each products}}
+                      <div class="col-md-4 col-sm-4  profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <h4 class="brief"><i>{{this._nameproduct}}</i></h4>
+                            <img style="width: 100%; " src="{{this._img}}" alt="image" />
+                            <div>
+                              <h2>{{this._idcate}}</h2>
+                              <p><strong>Detail </strong> {{this._detail}} </p>
+                              <ul class="list-unstyled">
+                                <li><i class="fa fa-building"></i>  Producer: {{this._procedure}} </li>
+                                <li><i class="fa fa-money"></i>  Price: {{this._price}} </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class=" bottom text-center">
+                        
+
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
+                </div>
+</div>
+</div>
+</div>
