@@ -20,6 +20,7 @@
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
+            {{#unless log}}
              <div class="top_nav">
                 <div class="nav_menu">
                     <div class="nav toggle">
@@ -155,12 +156,12 @@
                     <!-- /sidebar menu -->
                 </div>
             </div>
+            {{/unless}}
             <div class="right_col" role="main">
                 {{{body}}}
             </div>
         </div>
     </div>
-
     <!-- jQuery -->
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

@@ -28,10 +28,10 @@ module.exports = {
         }
         var t=[s]
         page_items.push({page:si,search:t})
-        console.log(page_items)
         return result;
     },
     mongooseToObject: function (mongoose) {
+       console.log(mongoose._idcate)
         return mongoose ? mongoose.toObject() : mongoose;
     },
 };

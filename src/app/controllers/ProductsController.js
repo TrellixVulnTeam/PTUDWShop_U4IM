@@ -6,7 +6,7 @@ const PAGE_SIZE=4
 class ProductsController {
 
     add(req, res) {
-        res.render('layouts/products/add');
+        res.render('products/add');
     }
     store(req, res) {
         const product = new Product(req.body);
@@ -29,7 +29,7 @@ class ProductsController {
                 page=1
             Product.find({})
             .lean()
-            .then(products => res.render('layouts/products/search',{
+            .then(products => res.render('products/search',{
                 products: searchInMongoose(products,s_item,PAGE_SIZE,page,page_items),page_items,
             }))
             .catch(next)
@@ -37,7 +37,7 @@ class ProductsController {
     update(req, res,next) {
         Product.findById(req.params.id)
         .then((product) =>
-            res.render('layouts/products/update', {
+            res.render('products/update', {
                 product: mongooseToObject(product),
             }),
         )
@@ -65,7 +65,7 @@ class ProductsController {
                         }
                         page_items.push(item)
                     }
-                    res.render('layouts/products/show',{products,page_items})           
+                    res.render('products/show',{products,page_items})           
                 })
             })
             .catch(next)

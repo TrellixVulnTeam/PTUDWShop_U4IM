@@ -1,7 +1,7 @@
 class MainController {
 
     show(req, res) {
-        res.render('layouts/main/zero');
+        res.render('main/zero');
     }
 }
 
