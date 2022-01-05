@@ -1,7 +1,15 @@
 class MainController {
 
     show(req, res) {
-        res.render('main/zero');
+        if(req.session._iduser)
+        {
+            res.render('main/zero',{data:req.session});
+        }
+        else
+        {
+            
+            res.redirect("/accounts/login");
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+var session = require('express-session');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const methodOverride = require('method-override');
@@ -7,6 +8,7 @@ const route = require('./routes/index.js');
 const db = require('./config/db/Index.js');
 
 const app = express();
+app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
 const port = 3000;
 db.connect();
 

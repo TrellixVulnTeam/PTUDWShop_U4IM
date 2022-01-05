@@ -21,6 +21,7 @@
     "sass": "^1.43.4"
   },
   "dependencies": {
+    "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "route": "^0.2.5",
     "routes": "^2.1.0"

@@ -31,7 +31,6 @@ module.exports = {
         return result;
     },
     mongooseToObject: function (mongoose) {
-       console.log(mongoose._idcate)
         return mongoose ? mongoose.toObject() : mongoose;
     },
 };

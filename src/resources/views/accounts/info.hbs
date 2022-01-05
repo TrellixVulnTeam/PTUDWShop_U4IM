@@ -1,0 +1,44 @@
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+							<div class="x_panel">
+                                									<h3>Personal Info</h3>
+								<div class="x_content">
+									<br />
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="/accounts/save-update/{{data._id}}?_method=PUT">
+										<div class="item form-group">
+											<label for="_nameproduct" class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea  class="form-control" type="text" name="_name" >{{data._name}}</textarea>
+											</div>
+										</div>
+                                        										<div class="item form-group">
+											<label  class="col-form-label col-md-3 col-sm-3 label-align">Address</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea  class="form-control" type="text" name="_address">{{data._address}}</textarea>
+											</div>
+										</div>
+										<div class="item form-group">
+											<label  class="col-form-label col-md-3 col-sm-3 label-align">Email</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input class="form-control" type="text" name="_email" value={{data._email}}></input>
+											</div>
+										</div>
+                                        										<div class="item form-group">
+											<label for="_nameproduct" class="col-form-label col-md-3 col-sm-3 label-align">Avatar</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea class="form-control" type="text" name="_avatar">{{data._avatar}}</textarea>
+											</div>
+										</div>									
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<a href="/"><button class="btn btn-primary" type="button"> Exit</a></button>
+												<button type="submit" class="btn btn-success">  Save</button>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>

@@ -20,7 +20,8 @@
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
-            {{#unless log}}
+            {{#if data}}
+            {{#unless data._message}}
              <div class="top_nav">
                 <div class="nav_menu">
                     <div class="nav toggle">
@@ -30,7 +31,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="/img/img.jpg" alt="">Manager
+                                    <img src={{data._avatar}} alt="">{{data._name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="logout.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
@@ -51,11 +52,11 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="/img/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src={{data._avatar}} alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Manager</h2>
+                            <h2>{{data._name}}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -118,7 +119,18 @@
                                 <li>
                                     <a><i class="fa fa-user"></i> Account<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a >Individual</a></li>
+                                        <li><a href="/accounts/show">Personal account</a></li>
+                                        <li>
+                                            <a>Admin<span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li>
+                                                    <a href="/accounts/admin-add" >Add</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/accounts/admin-list">List</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                         <li>
                                             <a>Customer<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
@@ -157,6 +169,7 @@
                 </div>
             </div>
             {{/unless}}
+            {{/if}}
             <div class="right_col" role="main">
                 {{{body}}}
             </div>

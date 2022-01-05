@@ -1,0 +1,47 @@
+<div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Accounts of Admin</h3>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="x_panel">
+
+                            <div class="x_content">
+
+
+
+                                <!-- start project list -->
+                                <table class="table table-striped projects">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%">#</th>
+                                            <th style="width: 40%">Name</th>
+                                            <th style="width: 50%">Contact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each infomations}}
+                                        <tr>
+                                            <td>#</td>
+                                            <td>
+                                                <a>{{this._name}}</a>
+                                            </td>
+                                            <td>
+                                                <a>{{this._email}}</a>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>

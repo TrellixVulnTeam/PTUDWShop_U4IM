@@ -6,7 +6,15 @@ const PAGE_SIZE=4
 class ProductsController {
 
     add(req, res) {
-        res.render('products/add');
+        if(req.session._iduser)
+        {
+
+        res.render('products/add',{data:req.session});
+        }
+        else{
+            
+            res.redirect("/accounts/login");
+        }
     }
     store(req, res) {
         const product = new Product(req.body);
