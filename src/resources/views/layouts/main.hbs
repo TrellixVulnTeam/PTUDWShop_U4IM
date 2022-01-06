@@ -20,7 +20,7 @@
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
-            {{#if data}}
+            {{#if admin}}
             {{#unless data._message}}
              <div class="top_nav">
                 <div class="nav_menu">
@@ -31,10 +31,10 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src={{data._avatar}} alt="">{{data._name}}
+                                    <img src={{admin._avatar}} alt="">{{admin._name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="logout.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <a class="dropdown-item" href="/accounts/out"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
                             </li>
                         </ul>
@@ -52,11 +52,11 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src={{data._avatar}} alt="..." class="img-circle profile_img">
+                            <img src={{admin._avatar}} alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>{{data._name}}</h2>
+                            <h2>{{admin._name}}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->

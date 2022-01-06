@@ -1,9 +1,9 @@
 class MainController {
 
     show(req, res) {
-        if(req.session._iduser)
+        if(req.session.admin)
         {
-            res.render('main/zero',{data:req.session});
+            res.render('main/zero',{admin:req.session.admin});
         }
         else
         {

@@ -1,18 +1,13 @@
 const Account=require('../models/Account')
-const Information=require('../models/Information')
-const { mutipleMongooseToObject } = require('../../util/mongoose');
-const { mongooseToObject } = require('../../util/mongoose');
-const { searchInMongoose } = require('../../util/mongoose');
+
+
 const PAGE_SIZE=4
-const log=1
 class AccountsController {
     login(req, res) {
-        Information.find({})
-        .lean()
-        .then(infomations=>{
-            console.log(infomations);
-        })
         res.render('accounts/login');
+    }    
+    out(req, res) {
+        res.redirect('/accounts/login');
     }
     check(req,res,next){
         var username=req.body._username;
@@ -25,22 +20,9 @@ class AccountsController {
         .then(account =>{
           if(account.length>=1)
           {
-              if(account[0]._permission==true)
-                {
-              Information.find({_iduser:account[0]._iduser})
-              .lean()
-              .then(information=>{
-                sessData._iduser=information[0]._iduser;
-                  sessData._name=information[0]._name;
-                  sessData._avatar=information[0]._avatar;
-                  res.redirect('/')
-              })
-              return;
-             }
-             else
-             {
-                sessData._message="This website is just for admin";
-             }
+                sessData.admin=account[0];
+                res.redirect('/');
+                return;
           }
           else
           {
@@ -52,13 +34,9 @@ class AccountsController {
         .catch(next)
     }
     show(req, res) {
-        if(req.session._iduser)
+        if(req.session.admin)
         {
-            Information.find({_iduser:req.session._iduser})
-             .lean()
-             .then(information=>{
-                res.render('accounts/info',{data:information[0]});
-             })
+                res.render('accounts/info',{admin:req.session.admin});
         }
         else{
             
@@ -66,32 +44,69 @@ class AccountsController {
         }
     }
     adminlist(req, res) {
-        if(req.session._iduser)
+        if(req.session.admin)
         {
-            Information.find({})
+            Account.find({})
              .lean()
-             .then(info=>{
-                var informations=[]
-                for(let i of infos)
-                {
-                    if (i._permission==true)
-                    {
-                        informations.push(i);
-                    }
-                }
-                res.render('accounts/list',{data:req.session,informations});
+             .then(accounts=>{
+                 res.render("accounts/list",{admin:req.session.admin,admins:accounts}
+                 );
              })
         }
         else{
-            
-            res.redirect("/accounts/login");
+           res.redirect("/accounts/login");
+        }
+    }
+    adminadd(req, res) {
+        if(req.session.admin)
+        {
+            res.render('accounts/add/admin',{admin:req.session.admin})
+        }
+        else{
+           res.redirect("/accounts/login");
+        }
+    }
+    adminstore(req, res) {
+        if(req.body._password!=req.body._password2)
+        {
+            req.session.wmessage="The Password and Repeat password is not the same";
+            res.render('accounts/add/admin',{admin:req.session.admin,data:req.session});
+        }
+        else
+        {
+            if(req.body._password.length<=8)
+            {
+                req.session.wmessage="The minimum length of password is 8";
+                res.render('accounts/add/admin',{admin:req.session.admin,data:req.session});
+            }
+            else
+            {
+                var t;
+                Account.find({_username:req.body._username})
+                .lean()
+                .then(account=>{
+                    if (account.length>=1)
+                    {
+                        req.session.wmessage="The username is exist";
+                        res.render('accounts/add/admin',{admin:req.session.admin,data:req.session});
+                    }
+                    else
+                    {
+                        const account = new Account(
+                            req.body
+                            );
+                        account
+                            .save()
+                            .then(()=>res.redirect('/accounts/admin-list'))
+                    }
+                })
+            }
         }
     }
     save(req, res, next) {
-        Information.updateOne({ _id: req.params.id }, req.body)
+        Account.updateOne({ _id: req.params.id }, req.body)
             .then(() => {
-                req.session._name=req.body._name;
-                req.session._avatar=req.body._avatar;
+                req.session.admin=req.body;
                 res.redirect('/')})
             .catch(next);
     }

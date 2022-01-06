@@ -6,10 +6,10 @@ const PAGE_SIZE=4
 class ProductsController {
 
     add(req, res) {
-        if(req.session._iduser)
+        if(req.session.admin)
         {
 
-        res.render('products/add',{data:req.session});
+        res.render('products/add',{admin:req.session.admin});
         }
         else{
             
