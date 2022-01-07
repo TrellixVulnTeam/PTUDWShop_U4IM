@@ -1,0 +1,29 @@
+<div class="mt-4">
+    <div class="x_panel">
+        									<h3>List of customers</h3>
+                        					<div class="pagination">
+						{{#each page_items}}
+						<a href="/customers/show?page={{value}}" class="btn btn-secondary">{{value}}</a>
+						{{/each}}
+					</div>
+
+                      <div class="clearfix"></div>
+                         {{#each customers}}
+                         <a href="/customers/{{this._id}}/detail"> 
+                      <div class="col-md-4 col-sm-4  profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <img style="width: 100%; " src="{{this._avatar}}" alt="image" />
+                            <h4 class="brief">Name: <i>{{this._name}}</i></h4>
+                          </div>
+                          <div class=" bottom text-center">
+                        
+
+                          </div>
+                        </div>
+                      </div>
+                      </a>
+                              {{/each}}
+                </div>
+</div>
+</div>

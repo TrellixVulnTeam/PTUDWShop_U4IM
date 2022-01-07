@@ -3,6 +3,7 @@ const express = require('express');
 var session = require('express-session');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const hbs=require('hbs')
 const methodOverride = require('method-override');
 const route = require('./routes/index.js');
 const db = require('./config/db/Index.js');

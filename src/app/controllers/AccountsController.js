@@ -40,7 +40,8 @@ class AccountsController {
         }
         else{
             
-            res.redirect("/accounts/login");
+            
+            
         }
     }
     adminlist(req, res) {
