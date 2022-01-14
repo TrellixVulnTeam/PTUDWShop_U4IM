@@ -5,29 +5,38 @@ const Customer=require('../models/Customer')
 const PAGE_SIZE=6
 class OrdersController {
     show(req, res) {
-        var page =req.query.page
-            page=parseInt(page)
-            
             var status=req.query.s
-            if(page<1 || !page)
-                page=1
+            var input=[]
             Order.find({_status:status})
             .lean()
             .then(orders =>{ 
-                var input=[];
-                for(let i=0;i<orders.length;i++)
-                {
-                    var data=[];
-                    Customer.findById(orders[i]._iduser)
-                    .lean()
-                    .then(customers=>{data.push(customers)})
-                    data.push(orders[i]);
-                    input.push[data]
+                    Customer.find()
+                    .then((customers)=>{
+                    for(let i=0;i<orders.length;i++)
+                    {
+                        var data={};
+                        for(let j=0;j<customers.length;j++)
+                        {
+                        if(orders[i]._iduser==customers[j]._id)
+                        {
+                            data={
+                                _name:customers[j]._name,
+                                _address:customers[j]._address,
+                                _status:orders[i]._status,
+                                _book:orders[i]._book,
+                            };
+                            input.push(data);
+                            break;
+                        }
+                        }
+                    }
+                    console.log(input);
+                    res.render('orders/show',{
+                        admin:req.session.admin,
+                        input,
+                    })
                 }
-                res.render('orders/show',{
-                admin:req.session.admin,
-                input,
-            })})
+            )})
             
     }
 }

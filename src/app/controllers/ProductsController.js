@@ -73,6 +73,7 @@ class ProductsController {
                         }
                         page_items.push(item)
                     }
+                    console.log(products);
                     res.render('products/show',{products,page_items})           
                 })
             })

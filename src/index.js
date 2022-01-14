@@ -10,7 +10,7 @@ const db = require('./config/db/Index.js');
 
 const app = express();
 app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
-const port = 3000;
+const port = 3001;
 db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
