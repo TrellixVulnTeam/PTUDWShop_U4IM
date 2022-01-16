@@ -1,44 +1,83 @@
+        <div class="x_content">
+                                    <form class="" action="" method="post" novalidate>
+                                        <span class="section">Personal Info</span>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required"></span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <textarea class="form-control" data-validate-length-range="6" data-validate-words="2" name="_name"  >{{admin._name}}</textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span class="required"></span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <textarea class="form-control" class='optional' name="_address" data-validate-length-range="5,15" type="text" >{{admin._address}}</textarea>
+                                        </div>
+										</div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required"></span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" name="_email" class='email'  type="email"value={{admin._email}} >
+                                        </div>
+										</div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Avatar<span class="required"></span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" name="_avatar" class='email'  type="email" value={{admin._avatar}} >
+                                        </div>
+										</div>
+                                        <div class="field item form-group">
+											<label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6">
+												<input class="form-control" type="password" id="password1" name="_password" value={{admin._password}} required='required' >
+												<span style="position: absolute;right:15px;top:7px;" onclick="hideshow()" >
+													<i id="slash" class="fa fa-eye-slash"></i>
+													<i id="eye" class="fa fa-eye"></i>
+												</span>
+											</div>
+										</div>
+                                        
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat password<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" type="password" id="password1" name="_password2" value={{admin._password}} required='required' >
+												
+                                        </div>
+										</div>
+                                        {{#if wmessage}}
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Warning</label>
+                                            <div class="col-md-6 col-sm-6">
+                                            <h2 class="step-title">{{wmessage}}</h2>
+                                            </div>
+                                        </div>
+                                        {{/if}}
+                                        <div class="ln_solid">
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <button type='submit' class="btn btn-primary">Submit</button>
+                                                    <button type='reset' href="/accounts/admin-list" class="btn btn-success">Clear</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <script>
+		function hideshow(){
+			var password = document.getElementById("password1");
+			var slash = document.getElementById("slash");
+			var eye = document.getElementById("eye");
+			
+			if(password.type === 'password'){
+				password.type = "text";
+				slash.style.display = "block";
+				eye.style.display = "none";
+			}
+			else{
+				password.type = "password";
+				slash.style.display = "none";
+				eye.style.display = "block";
+			}
 
-					<div class="row">
-						<div class="col-md-12 col-sm-12 ">
-							<div class="x_panel">
-                                									<h3>Personal Info</h3>
-								<div class="x_content">
-									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="/accounts/save-update/{{data._id}}?_method=PUT">
-										<div class="item form-group">
-											<label for="_nameproduct" class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
-											<div class="col-md-6 col-sm-6 ">
-												<textarea  class="form-control" type="text" name="_name" >{{admin._name}}</textarea>
-											</div>
-										</div>
-                                        										<div class="item form-group">
-											<label  class="col-form-label col-md-3 col-sm-3 label-align">Address</label>
-											<div class="col-md-6 col-sm-6 ">
-												<textarea  class="form-control" type="text" name="_address">{{admin._address}}</textarea>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label  class="col-form-label col-md-3 col-sm-3 label-align">Email</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input class="form-control" type="text" name="_email" value={{data._email}}></input>
-											</div>
-										</div>
-                                        										<div class="item form-group">
-											<label for="_nameproduct" class="col-form-label col-md-3 col-sm-3 label-align">Avatar</label>
-											<div class="col-md-6 col-sm-6 ">
-												<textarea class="form-control" type="text" name="_avatar">{{data._avatar}}</textarea>
-											</div>
-										</div>									
-										<div class="item form-group">
-											<div class="col-md-6 col-sm-6 offset-md-3">
-												<a href="/"><button class="btn btn-primary" type="button"> Exit</a></button>
-												<button type="submit" class="btn btn-success">  Save</button>
-											</div>
-										</div>
-
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
+		}
+	</script>

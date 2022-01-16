@@ -106,11 +106,20 @@ class AccountsController {
         }
     }
     save(req, res, next) {
-        Account.updateOne({ _id: req.params.id }, req.body)
+        console.log(req.body)
+        if(req.body._password!=req.body._password2)
+        {
+            var wmessage="The Password and Repeat password is not the same";
+            res.render('accounts/add/admin',{admin:req.session.admin,wmessage});
+        }
+        else
+        {
+        Account.updateOne({ _id: req.session.admin._id }, req.body)
             .then(() => {
                 req.session.admin=req.body;
                 res.redirect('/')})
             .catch(next);
+        }
     }
 }
 module.exports = new AccountsController();

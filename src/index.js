@@ -7,12 +7,30 @@ const hbs=require('hbs')
 const methodOverride = require('method-override');
 const route = require('./routes/index.js');
 const db = require('./config/db/Index.js');
-
+var nodemailer = require('nodemailer');
 const app = express();
 app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
 const port = 3001;
 db.connect();
+var nodemailer = require('nodemailer');
 
+const option = {
+    service: 'gmail',
+    auth: {
+        user: 'ptudwshop20212022@gmail.com', // email hoặc username
+        pass: 'Leminhduc0505@' // password
+    }
+};
+var transporter = nodemailer.createTransport(option);
+transporter.verify(function(error, success) {
+    // Nếu có lỗi.
+    if (error) {
+        console.log(error);
+    } else { //Nếu thành công.
+        console.log('Kết nối thành công!');
+    }
+});
+var transporter = nodemailer.createTransport(option);
 app.use(express.static(path.join(__dirname, 'public')));
 console.log(path.join(__dirname, 'public'))
 app.use(
