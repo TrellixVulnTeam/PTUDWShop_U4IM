@@ -4,6 +4,8 @@ const router = express.Router();
 const accountsController = require('../app/controllers/AccountsController');
 
 router.get('/login', accountsController.login);
+router.get('/forgot', accountsController.forgot);
+router.post('/forgot', accountsController.send);
 router.get('/out', accountsController.out);
 router.post('/login', accountsController.check);
 router.get('/show', accountsController.show);

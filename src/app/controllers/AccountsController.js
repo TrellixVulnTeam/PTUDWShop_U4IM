@@ -52,6 +52,58 @@ class AccountsController {
             res.redirect("/accounts/login");
         }
     }
+    forgot(req,res){
+        res.render('accounts/forgot')
+    }
+    send(req,res)
+    {
+        var email=req.body.email;
+        Account.find({_email:email})
+        .lean()
+        .then(account=>{
+            if(account.length==0)
+            {
+                var message="Email do not exist"
+                res.render('accounts/forgot',{message})
+            }
+            else
+            {
+                var password = "";
+                        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                       
+                        for (var i = 0; i < 8; i++)
+                          password += possible.charAt(Math.floor(Math.random() * possible.length));
+                    
+                        var transporter = nodemailer.createTransport(option);
+                        transporter.verify(function(error, success) {
+                            // Nếu có lỗi.
+                            if (error) {
+                                console.log(error);
+                            } else { //Nếu thành công.
+                                console.log('Kết nối thành công!');
+                            }
+                        });
+                        var mail = {
+                            from: 'ptudwshop20212022@gmail.com', // Địa chỉ email của người gửi
+                            to: account[0]._email, // Địa chỉ email của người gửi
+                            subject: 'Đặt lại mật khẩu', // Tiêu đề mail
+                            text: 'Mật khẩu mới của bạn là '+password, // Nội dung mail dạng text
+                        };
+                        //Tiến hành gửi email
+                        transporter.sendMail(mail, function(error, info) {
+                            if (error) { // nếu có lỗi
+                                console.log(error);
+                            } else { //nếu thành công
+                                console.log('Email sent: ' + info.response);
+                            }
+                        });
+                account[0]._password=password;
+                Account.updateOne({ _id: account[0]._id }, account[0])
+                .then(() => {
+                    res.redirect('/accounts/login')})
+            }
+        })
+    }
     adminlist(req, res) {
         if(req.session.admin)
         {
@@ -106,7 +158,7 @@ class AccountsController {
                             from: 'ptudwshop20212022@gmail.com', // Địa chỉ email của người gửi
                             to: req.body._email, // Địa chỉ email của người gửi
                             subject: 'Chào mừng admin mới', // Tiêu đề mail
-                            text: 'Mật khẩu mặc định của bạn là'+password, // Nội dung mail dạng text
+                            text: 'Mật khẩu mặc định của bạn là '+password, // Nội dung mail dạng text
                         };
                         //Tiến hành gửi email
                         transporter.sendMail(mail, function(error, info) {
