@@ -2,7 +2,7 @@ const Order=require('../models/Order')
 const Product=require('../models/Product')
 const Orderdetail=require('../models/Orderdetail')
 class StatisticalsController {
-    product(req,res)
+    turnover(req,res)
     {
         var day=0;
         var month=0;
@@ -44,13 +44,41 @@ class StatisticalsController {
         var status=req.query.t;
         console.log(status);
     }
-    order(req,res)
+    product(req,res)
     {
-        Orderdetail.find({})
-        .lean()
-        .then((details)=>console.log(details));
-        var status=req.query.t;
-
+        var statistical=[];
+        Product.find({})
+            .lean()
+        .then((products)=>{
+            for(let i=0;i<products.length;i++)
+            {
+               var data={};
+                Orderdetail.find({_idproduct:products[i]._id})
+                .lean()
+                .then(details=>{
+                    var result=0;
+                    for(let j=0;j<details.length;j++)
+                    {
+                        result=result+details[j]._amount;
+                    }
+                    data={
+                        name:products[i]._name,
+                        procedure:products[i]._procedure,
+                        price:products[i]._price,
+                        turnover:products[i]._price*result,
+                        amount:result,
+                    }
+                    statistical.push(data);
+                    if(i==products.length-1)
+                    {
+                        var h=1
+                        statistical.push(h);
+                        res.render('statisticals/product',{statistical:statistical.sort(function(a, b){return a.amount - b.amount}).slice(-11,-1).reverse()})
+                    }
+                })
+            }
+        
+        })
     }
 }
 module.exports = new StatisticalsController();
