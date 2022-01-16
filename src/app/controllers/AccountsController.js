@@ -7,6 +7,7 @@ class AccountsController {
         res.render('accounts/login');
     }    
     out(req, res) {
+        req.session.destroy();
         res.redirect('/accounts/login');
     }
     check(req,res,next){

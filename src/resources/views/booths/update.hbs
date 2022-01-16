@@ -1,0 +1,92 @@
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+							<div class="x_panel">
+                                									<h3>Booth update</h3>
+								<div class="x_content">
+									<br />
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="/booths/{{product._id}}/save-update">
+										
+										<div class="item form-group">
+											<label for="_nameproduct" class="col-form-label col-md-3 col-sm-3 label-align">Name</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea id="_nameproduct" class="form-control" type="text" name="_nameproduct">{{product._nameproduct}}</textarea>
+											</div>
+										</div>
+                                        										<div class="item form-group">
+											<label for="_idcate" class="col-form-label col-md-3 col-sm-3 label-align">Prduct type</label>
+											<div class="col-md-6 col-sm-6 ">
+									    <select name="_idcate" value={{product._idcate}}>
+									<option value="Keyboard">Keyboard</option>
+           							 <option value="Watch">Watch</option>
+            						<option value="Mouse">Mosue</option>
+         							   <option value="Headphone">Headphone</option>
+										<option value="Laptop">Laptop</option>
+        							</select>
+									</div>
+										</div>
+
+										
+										<div class="item form-group">
+											<label for="_img" class="col-form-label col-md-3 col-sm-3 label-align">Image</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="_img" class="form-control" type="text" value={{product._img}} name="_img">
+											</div>
+										</div>
+                                        										<div class="item form-group">
+											<label for="_price" class="col-form-label col-md-3 col-sm-3 label-align">Price</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="_price" class="form-control"  value={{product._price}} type="text" name="_price">
+											</div>
+										</div>
+                                        									
+                                        										<div class="item form-group">
+											<label for="_amount" class="col-form-label col-md-3 col-sm-3 label-align">Amount</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="_amount" class="form-control" value={{product._amount}} type="text" name="_amount">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label for="_procedure" class="col-form-label col-md-3 col-sm-3 label-align">Producer</label>
+<div class="col-md-6 col-sm-6 ">
+									    <select name="_procedure">
+									<option value="Asus">Asus</option>
+           							 <option value="Microsoft">Microsoft</option>
+            						<option value="Apple">Appple</option>
+         							   <option value="Samsung">Samsung</option>
+										<option value="Google">Google</option>
+        							</select>
+									</div>
+										</div>
+                                        										<div class="item form-group">
+											<label for="_detail" class="col-form-label col-md-3 col-sm-3 label-align">Detail</label>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea id="_detail" class="form-control"  type="text" name="_detail">{{product._detail}}</textarea>
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label for="_amount" class="col-form-label col-md-3 col-sm-3 label-align">Display: </label>
+											<div class="col-md-6 col-sm-6 ">
+                                                {{#if display}}
+												<input id="_amount" class="form-control" value="True" type="text" name="_amount">
+                                                {{/if}}
+                                                {{#if notdisplay}}
+                                                <input id="_amount" class="form-control" value="False" type="text" name="_amount">
+                                                {{/if}}
+											</div>
+										</div>
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<a href="/booths"><button class="btn btn-primary" type="button"> Exit</a></button>
+                                                
+												 <a href="/booths/{{product._id}}/update"><button type="button" class="btn btn-success">  Display/Not Display Product</a></button>
+												
+                                               
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>

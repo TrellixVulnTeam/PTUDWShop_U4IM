@@ -6,8 +6,7 @@ class MainController {
             res.render('main/zero',{admin:req.session.admin});
         }
         else
-        {
-            
+        {  
             res.redirect("/accounts/login");
         }
     }

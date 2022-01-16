@@ -1,0 +1,48 @@
+<div class="mt-4">
+    <div class="x_panel">
+        									<h3>List of products</h3>
+                        					<div class="pagination">
+						{{#each page_items}}
+						<a href="/products/show?page={{value}}" class="btn btn-secondary">{{value}}</a>
+						{{/each}}
+					</div>
+                    <div class="page-title">
+                    <div class="title_left">
+                        	<a href="/booths?p=Asus" class="btn btn-secondary">Asus</a>
+                            <a href="/booths?p=Microsoft" class="btn btn-secondary">Microsoft</a>
+                            <a href="/booths?p=Apple" class="btn btn-secondary">Apple</a>
+                            <a href="/booths?p=Samsung" class="btn btn-secondary">Samsung</a>
+                            <a href="/booths?p=Google" class="btn btn-secondary">Google</a>
+                </div>
+                  </div>
+                      <div class="clearfix"></div>
+                         {{#each products}}
+                      <div class="col-md-4 col-sm-4  profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <h4 class="brief"><i>{{this._nameproduct}}</i></h4>
+                            <img style="width: 100%; " src="{{this._img}}" alt="image" />
+                            <div>
+                              <h2>{{this._idcate}}</h2>
+                              <p><strong>Detail </strong> {{this._detail}} </p>
+                              <ul class="list-unstyled">
+                                <li><i class="fa fa-building"></i>  Producer: {{this._procedure}} </li>
+                                <li><i class="fa fa-money"></i>  Price: {{this._price}} </li>
+                                 <li><i class="fa fa-play"></i>  Display: {{this._booth}} </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class=" bottom text-center">
+                        
+                            <div class=" row-md-2">
+                              <button type="button" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil-square-o"> <a href="/booths/{{this._id}}/edit"></i>  Edit</a>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                              {{/each}}
+                </div>
+</div>
+</div>
