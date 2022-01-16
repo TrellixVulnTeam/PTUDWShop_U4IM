@@ -40,9 +40,7 @@ class AccountsController {
                 res.render('accounts/info',{admin:req.session.admin});
         }
         else{
-            
-            
-            
+            res.redirect("/accounts/login");
         }
     }
     adminlist(req, res) {
