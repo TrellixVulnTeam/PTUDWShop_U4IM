@@ -1,5 +1,14 @@
 const Account=require('../models/Account')
 
+var nodemailer = require('nodemailer');
+
+const option = {
+    service: 'gmail',
+    auth: {
+        user: 'ptudwshop20212022@gmail.com', // email hoặc username
+        pass: 'Leminhduc0505@' // password
+    }
+};
 
 const PAGE_SIZE=4
 class AccountsController {
@@ -67,20 +76,6 @@ class AccountsController {
         }
     }
     adminstore(req, res) {
-        if(req.body._password!=req.body._password2)
-        {
-            req.session.wmessage="The Password and Repeat password is not the same";
-            res.render('accounts/add/admin',{admin:req.session.admin,data:req.session});
-        }
-        else
-        {
-            if(req.body._password.length<=8)
-            {
-                req.session.wmessage="The minimum length of password is 8";
-                res.render('accounts/add/admin',{admin:req.session.admin,data:req.session});
-            }
-            else
-            {
                 var t;
                 Account.find({_username:req.body._username})
                 .lean()
@@ -92,23 +87,51 @@ class AccountsController {
                     }
                     else
                     {
+                        var password = "";
+                        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                       
+                        for (var i = 0; i < 8; i++)
+                          password += possible.charAt(Math.floor(Math.random() * possible.length));
+                    
+                        var transporter = nodemailer.createTransport(option);
+                        transporter.verify(function(error, success) {
+                            // Nếu có lỗi.
+                            if (error) {
+                                console.log(error);
+                            } else { //Nếu thành công.
+                                console.log('Kết nối thành công!');
+                            }
+                        });
+                        var mail = {
+                            from: 'ptudwshop20212022@gmail.com', // Địa chỉ email của người gửi
+                            to: req.body._email, // Địa chỉ email của người gửi
+                            subject: 'Chào mừng admin mới', // Tiêu đề mail
+                            text: 'Mật khẩu mặc định của bạn là'+password, // Nội dung mail dạng text
+                        };
+                        //Tiến hành gửi email
+                        transporter.sendMail(mail, function(error, info) {
+                            if (error) { // nếu có lỗi
+                                console.log(error);
+                            } else { //nếu thành công
+                                console.log('Email sent: ' + info.response);
+                            }
+                        });
                         const account = new Account(
                             req.body
                             );
+                            account._password=password;
                         account
                             .save()
                             .then(()=>res.redirect('/accounts/admin-list'))
                     }
                 })
-            }
-        }
     }
     save(req, res, next) {
         console.log(req.body)
         if(req.body._password!=req.body._password2)
         {
             var wmessage="The Password and Repeat password is not the same";
-            res.render('accounts/add/admin',{admin:req.session.admin,wmessage});
+            res.render('accounts/info',{admin:req.session.admin,wmessage});
         }
         else
         {
