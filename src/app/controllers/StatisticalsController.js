@@ -46,6 +46,7 @@ class StatisticalsController {
     }
     product(req,res)
     {
+        if(req.session.admin){
         var statistical=[];
         Product.find({})
             .lean()
@@ -62,23 +63,28 @@ class StatisticalsController {
                         result=result+details[j]._amount;
                     }
                     data={
-                        name:products[i]._name,
+                        name:products[i]._nameproduct,
                         procedure:products[i]._procedure,
                         price:products[i]._price,
                         turnover:products[i]._price*result,
                         amount:result,
+                        id:products[i]._id,
                     }
                     statistical.push(data);
                     if(i==products.length-1)
                     {
                         var h=1
                         statistical.push(h);
-                        res.render('statisticals/product',{statistical:statistical.sort(function(a, b){return a.amount - b.amount}).slice(-11,-1).reverse()})
+                        res.render('statisticals/product',{statisticals:statistical.sort(function(a, b){return a.amount - b.amount}).slice(-11,-1).reverse(),admin:req.session.admin})
                     }
                 })
             }
         
-        })
+        })}
+        else
+        {
+            res.redirect("/accounts/login");
+        }
     }
 }
 module.exports = new StatisticalsController();

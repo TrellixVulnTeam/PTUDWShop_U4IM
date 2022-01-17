@@ -20,15 +20,16 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 5%">#</th>
-                                            <th style="width: 25%">Name</th>
-                                            <th style="width: 20%">Procedure</th>
-                                            <th style="width: 15%">Amount</th>
-                                            <th style="width: 15%">Price</th>
-                                            <th style="width: 15%">Turnover</th>
+                                            <th style="width: 50%">Name</th>
+                                            <th style="width: 10%">Procedure</th>
+                                            <th style="width: 5%">Amount</th>
+                                            <th style="width: 10%">Price</th>
+                                            <th style="width: 10%">Turnover</th>
+                                            <th style="width: 10%">Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each statistical}}
+                                        {{#each statisticals}}
                                         <tr>
                                             <td>#</td>
                                             <td>
@@ -46,6 +47,9 @@
                                             </td>
                                           <td>
                                                 <a>{{this.turnover}}</a>
+                                            </td>
+                                            <td>
+                                                <a href="/products/{{this.id}}/update">detail</a>
                                             </td>
                                         </tr>
                                         {{/each}}
