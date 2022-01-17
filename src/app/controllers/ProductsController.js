@@ -6,19 +6,22 @@ const PAGE_SIZE=4
 class ProductsController {
 
     add(req, res) {
+
         if(req.session.admin)
         {
-
         res.render('products/add',{admin:req.session.admin});
         }
-        else{
-            
-            res.redirect("/accounts/login");
+        else
+        {
+                res.redirect("/accounts/login");
         }
     }
     store(req, res) {
+        req.body._procedure=req.body._procedure.toLowerCase();
+        req.body._idcate=req.body._idcate.toLowerCase();
         const product = new Product(req.body);
         product._slug=product._id;
+        product._booth=true;
         product
             .save()
             .then(()=>res.redirect('/products/show')) 
@@ -29,6 +32,8 @@ class ProductsController {
         .catch(next);
     }
     search(req, res,next) {
+        if(req.session.admin)
+        {
         var page =req.query.page
             page=parseInt(page)
             var page_items=[]
@@ -41,8 +46,15 @@ class ProductsController {
                 products: searchInMongoose(products,s_item,PAGE_SIZE,page,page_items),page_items,
             }))
             .catch(next)
+        }
+        else
+        {
+                res.redirect("/accounts/login");
+        }
     }
     update(req, res,next) {
+        if(req.session.admin)
+        {
         Product.findById(req.params.id)
         .then((product) =>
             res.render('products/update', {
@@ -50,8 +62,15 @@ class ProductsController {
             }),
         )
         .catch(next);
+        }
+        else
+        {
+                res.redirect("/accounts/login");
+        }
     }
     show(req, res,next) {
+        if(req.session.admin)
+        {
         var page =req.query.page
             page=parseInt(page)
             if(page<1 || !page)
@@ -79,7 +98,14 @@ class ProductsController {
             })
             .catch(next)
         }
+        else
+        {
+                res.redirect("/accounts/login");
+        }
+        }
     save(req, res, next) {
+        req.body._procedure=req.body._procedure.toLowerCase();
+        req.body._idcate=req.body._idcate.toLowerCase();
         Product.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/products/show'))
             .catch(next);

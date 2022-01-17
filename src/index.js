@@ -14,6 +14,8 @@ const port = 3001;
 db.connect();
 var nodemailer = require('nodemailer');
 
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 console.log(path.join(__dirname, 'public'))
 app.use(
