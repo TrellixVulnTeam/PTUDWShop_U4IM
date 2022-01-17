@@ -43,7 +43,7 @@ class ProductsController {
             Product.find({})
             .lean()
             .then(products => res.render('products/search',{
-                products: searchInMongoose(products,s_item,PAGE_SIZE,page,page_items),page_items,
+                products: searchInMongoose(products,s_item,PAGE_SIZE,page,page_items),page_items,admin:req.session.admin
             }))
             .catch(next)
         }
@@ -58,7 +58,7 @@ class ProductsController {
         Product.findById(req.params.id)
         .then((product) =>
             res.render('products/update', {
-                product: mongooseToObject(product),
+                product: mongooseToObject(product),admin:req.session.admin
             }),
         )
         .catch(next);
@@ -93,7 +93,7 @@ class ProductsController {
                         page_items.push(item)
                     }
                     console.log(products);
-                    res.render('products/show',{products,page_items})           
+                    res.render('products/show',{products,page_items,admin:req.session.admin})           
                 })
             })
             .catch(next)
