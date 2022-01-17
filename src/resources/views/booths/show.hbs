@@ -8,16 +8,16 @@
 					</div>
                     <div class="page-title">
                     <div class="title_left">
-                        	<a href="/booths?p=Asus" class="btn btn-secondary">Asus</a>
-                            <a href="/booths?p=Microsoft" class="btn btn-secondary">Microsoft</a>
-                            <a href="/booths?p=Apple" class="btn btn-secondary">Apple</a>
-                            <a href="/booths?p=Samsung" class="btn btn-secondary">Samsung</a>
-                            <a href="/booths?p=Google" class="btn btn-secondary">Google</a>
+                        	<a href="/booths?p=asus" class="btn btn-secondary">Asus</a>
+                            <a href="/booths?p=microsoft" class="btn btn-secondary">Microsoft</a>
+                            <a href="/booths?p=apple" class="btn btn-secondary">Apple</a>
+                            <a href="/booths?p=samsung" class="btn btn-secondary">Samsung</a>
+                            <a href="/booths?p=google" class="btn btn-secondary">Google</a>
                 </div>
                   </div>
                       <div class="clearfix"></div>
                          {{#each products}}
-                         <a href="/booths/{{this._id}}/edit">
+                        
                       <div class="col-md-4 col-sm-4  profile_details">
                         <div class="well profile_view">
                           <div class="col-sm-12">
@@ -33,9 +33,16 @@
                               </ul>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      </a>
+                       <div class=" bottom text-center">
+                        
+                            <div class=" row-md-2">
+                              <button type="button" class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil-square-o"> <a href="/booths/{{this._id}}/edit"></i>  Update</a>
+                              </button>
+                            </div>
+                          </div>
+                          </div>
+                          </div>
                               {{/each}}
                 </div>
 </div>
