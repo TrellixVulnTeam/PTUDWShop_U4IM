@@ -1,10 +1,12 @@
 <div  role="main">
             <div class="">
                 <div class="page-title">
+                    <h3>Status of Orders</h3>
                     <div class="title_left">
-                        	<a href="/orders/show?s=delivering" class="btn btn-secondary">Delivering</a>
-                            <a href="/orders/show?s=delivered" class="btn btn-secondary">Delivered</a>
-                            <a href="/orders/show?s=not" class="btn btn-secondary">Not delivery</a>
+                        <a href="/orders/show?s=not&p=1" class="btn btn-secondary">Not delivery</a>
+                        	<a href="/orders/show?s=delivering&p=1" class="btn btn-secondary">Delivering</a>
+                            <a href="/orders/show?s=delivered&p=1" class="btn btn-secondary">Delivered</a>
+                            
                 </div>
                 <div class="clearfix"></div>
 
@@ -15,34 +17,46 @@
                             <div class="x_content">
 
 
-
+                            {{#each pages}}
+                            <a href="/orders/show?p={{this.page}}&s={{this.status}}" class="btn btn-secondary">{{this.page}}</a>
+                            {{/each}}
                                 <!-- start project list -->
                                 <table class="table table-striped projects">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%">#</th>
-                                            <th style="width: 20%">Name customer</th>
-                                            <th style="width: 30%">Address</th>
+                                            <th style="width: 15%">Name</th>
+                                            <th style="width: 15%">Address</th>
+                                            <th style="width: 15%">Phone</th>
+                                            <th style="width: 15%">Note</th>
                                             <th style="width: 15%">Status</th>
-                                            <th style="width: 30%">Order date</th>
+                                            <th style="width: 20%">Order date</th>
+                                            <th style="width: 5%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{#each input}}
                                         <tr>
-                                            <td>#</td>
                                             <td>
-                                                <a>{{this._name}}</a>
+                                                <a>{{this.name}}</a>
 
                                             </td>
                                             <td>
-                                                <a>{{this._address}}</a>
+                                                <a>{{this.address}}</a>
                                             </td>
                                             <td>
-                                                <a>{{this._status}}</a>
+                                                <a>{{this.phone}}</a>
                                             </td>
                                             <td>
-                                                <a>{{this._book}}</a>
+                                                <a>{{this.note}}</a>
+                                            </td>
+                                            <td>
+                                                <a>{{this.status}}</a>
+                                            </td>
+                                            <td>
+                                                <a>{{this.book}}</a>
+                                            </td>
+                                            <td>
+                                                <a>{{this.total}}</a>
                                             </td>
                                         </tr>
                                         {{/each}}
